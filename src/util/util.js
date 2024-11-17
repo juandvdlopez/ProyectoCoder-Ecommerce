@@ -16,6 +16,7 @@ export const passportCall = strategy => function (req, res, next) {
             return res.status(401).json({error:`${info.message?info.message:info.toString()}`})
         }  
         req.user=user;   // return done(null, usuario)
+        
         return next()
     })(req, res, next);
 } 

@@ -6,6 +6,8 @@ import cookieParser from 'cookie-parser';
 
 import { router as authRouter } from './routes/authRoutes.js';
 import { router as sessionRouter } from './routes/sessionRoutes.js';
+import { router as adminRouter } from './routes/adminRoutes.js';
+import { authorizeRole } from './middleware/authorizeRole.js';
 import { connDB } from './util/ConnDB.js';
 import { config } from './config/config.js';	
 import { passportInit } from './config/passport.config.js';
@@ -35,7 +37,8 @@ app.use(express.static("./src/public"))
 
 app.use('/api/auth',authRouter); 
 //app.use('/api/session', passport.authenticate("current", { session: false }), sessionRouter)
-app.use('/api/session', passportCall("current"), sessionRouter)
+app.use('/api/session', passportCall("current"), authorizeRole(["user"]), sessionRouter)
+app.use('/api/admin', passportCall("current"),authorizeRole(["admin"]), adminRouter)
 
 
 

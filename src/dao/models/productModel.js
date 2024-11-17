@@ -10,7 +10,13 @@ export const productSchema=mongoose.model(
               },
               price: {
                 type: Number,
-                required: true
+                required: true, 
+                min : 0
+              },
+              stock: {
+                type: Number,
+                required: true,
+                min : 0
               },
               description: {
                 type: String,

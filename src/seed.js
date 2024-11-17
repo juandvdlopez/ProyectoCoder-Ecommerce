@@ -28,7 +28,7 @@ console.log(result);
 
 result = await mongoose.connection.collection('users').insertMany(seedUsers);
 console.log(result);
-
+ 
 
 
 process.exit();

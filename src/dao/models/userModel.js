@@ -12,8 +12,17 @@ export const userSchema=mongoose.model(
             age: Number,
             password: {type: String, required: true},
             //cart: Array,
-            role: { type: String, default: "user"},
+            role: { type: String, required: true, enum: ['user', 'admin'], default: 'user' },
             cart: {
+              type: [{
+                  product: {
+                      type: mongoose.Schema.Types.ObjectId,
+                      ref: 'Product',
+                      required: true
+                  },
+                  quantity: { type: Number, required: true }
+              }], default: [] } 
+            /*cart: {
                 items: [
                   {
                     productId: {
@@ -25,7 +34,7 @@ export const userSchema=mongoose.model(
                     quantity: { type: Number, required: true} //required: true }
                   }
                 ] 
-              } , default: { items: [] }
+              } , default: { items: [] }*/ 
 
         },
         

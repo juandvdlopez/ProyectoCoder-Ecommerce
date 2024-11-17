@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { UserManager } from '../data/userManager.js';
+//import { UserManager } from '../data/userManager.js';
 
 import { postSignup, getError , postLogin, getLogout } from '../controllers/authController.js';
 import passport from 'passport';

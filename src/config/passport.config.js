@@ -1,7 +1,7 @@
 import passport from "passport"
 import local    from "passport-local"
 import passportJwt from "passport-jwt"
-import { UserManager } from "../data/userManager.js"
+import { UserDAO } from "../dao/UserDAO.js"
 import { hashPassword, comparePassword } from "../util/util.js" 
 import { config } from "./config.js"
 
@@ -36,13 +36,13 @@ export const passportInit=()=>{
                 if (!email) {	
                     return done(null, false, { message: "El email no puede estar vacio" })
                 } 
-                let exists = await UserManager.getBy({ email: username })
+                let exists = await UserDAO.getBy({ email: username })
                 if (exists) {
                     
                     return done(null, false, { message: "El email ya se encuentra registrado" })
                 }
                 password = hashPassword(password); 
-                let newUser = await UserManager.addUser({ firstName: req.body.firstName, lastName: req.body.lastName, email: username, password })
+                let newUser = await UserDAO.addUser({ firstName: req.body.firstName, lastName: req.body.lastName, email: username, role: req.body.role, password })
                 return done(null, newUser)
             } catch (error) {
                 return done(error)
@@ -61,7 +61,7 @@ export const passportInit=()=>{
             async ( username, password, done) => {
                 try { 
                  
-                    let user = await UserManager.getBy({ email: username })
+                    let user = await UserDAO.getBy({ email: username })
                     console.log( user )
                   
                     if (!user) {    
