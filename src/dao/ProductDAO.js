@@ -1,5 +1,5 @@
 import { productSchema } from './models/productModel.js';
-import mongoose from 'mongoose';
+
 
 export class ProductDAO{
     static async getBy(filter={}){
@@ -26,8 +26,7 @@ export class ProductDAO{
     }
 
     static async updateStock(id, newStock) {
-        
-     
+           
         return await productSchema.findByIdAndUpdate({_id:id}, { stock: newStock }, { new: true });
       }
 

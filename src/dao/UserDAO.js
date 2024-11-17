@@ -2,6 +2,7 @@ import { userSchema } from './models/userModel.js';
 
 export class UserDAO{
     static async getBy(filter={}){
+         
         return await userSchema.findOne(filter).lean()
     }
 

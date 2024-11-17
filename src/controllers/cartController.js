@@ -16,6 +16,16 @@ export const addToCart = async (req, res) => {
 } 
 
 
+export const removeFromCart = async (req, res) => {
+    try {
+        const userId = req.user.id;
+        const cart = await CartService.removeFromCart(userId);
+        res.status(200).json(cart);
+      } catch (error) {
+        res.status(400).json({ message: error.message });
+      }
+} 
+
 export class CartController {
     static async addToCart(req, res) {
         try {
@@ -33,7 +43,7 @@ export class CartController {
     static async removeFromCart(req, res) {
             try {
                 const userId = req.user.id;
-                const cart = await CartService.getUserCart(userId);
+                const cart = await CartService.removeFromCart(userId, productId);
                 res.status(200).json(cart);
               } catch (error) {
                 res.status(400).json({ message: error.message });

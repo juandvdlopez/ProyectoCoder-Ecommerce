@@ -1,4 +1,4 @@
-process.loadEnvFile("./src/.env")
+process.loadEnvFile("./.env")   
 
 export const config={
     PORT:process.env.PORT, 

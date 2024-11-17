@@ -1,28 +1,38 @@
 import mongoose from "mongoose"
+import { v4 as uuidv4 } from 'uuid'; // Para generar códigos únicos
 
-export const ticketSchema=mongoose.model(
-    "Order",
+
+
+
+
+   export const ticketSchema = mongoose.model(
+    "Ticket",
     new mongoose.Schema(
         {
-            orderNumber: {type: String, unique: true},
-            client: {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: "users"
+
+            code: {
+              type: String,
+              unique: true,
+              default: () => uuidv4(), // Autogenera un código único
             },
-            products: {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: "products"
-            },  
-            totalPrice: {
-                type: Number,
-                required: true
+            purchase_datetime: {
+              type: Date,
+              default: Date.now, // Registra la fecha y hora actual
             },
-            status: {
-                type: Boolean, default: false
-            }
-        },
-        {
-            timestamps:true
-        }
+            amount: {
+              type: Number,
+              required: true,
+              min: 0,
+            },
+            purchaser: {
+              type: String,
+              required: true,
+            },
+          }
     )
-)
+    
+    );
+      
+
+
+

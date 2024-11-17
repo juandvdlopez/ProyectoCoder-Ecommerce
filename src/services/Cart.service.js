@@ -30,7 +30,7 @@ export class CartService{
         
         }
 
-        await ProductDAO.updateStock(productId, product.stock - quantity);
+        //await ProductDAO.updateStock(productId, product.stock - quantity);
 
         console.log('carrito actualizado', user.cart)
         return await UserDAO.updateUserCart(userId, user.cart);
@@ -52,4 +52,7 @@ export class CartService{
         return await UserDAO.getBy({_id:userId})
 
     } 
+
+
+   
 } 
