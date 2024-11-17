@@ -23,7 +23,6 @@ export class UserDAO{
     }
 
     static async updateUserCart(id, newCart){
-        console.log('Entró al updateUserCart', newCart)
         return await userSchema.findOneAndUpdate({_id:id}, {cart: newCart},{new:true})
     }
 
